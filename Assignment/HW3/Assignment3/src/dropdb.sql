@@ -1,0 +1,13 @@
+DROP TABLE Yelp_CheckIn;
+DROP TABLE Review_Votes;
+DROP TABLE Business_Attributes;
+DROP TABLE neighborhoods;
+DROP TABLE hours;
+DROP TABLE Sub_Categories;
+DROP TABLE Main_Categories;
+DROP TABLE friends;
+DROP TABLE compliments;
+DROP TABLE votes;
+DROP TABLE Yelp_Reviews;
+DROP TABLE Yelp_BUSINESSES;
+DROP TABLE Yelp_Users;

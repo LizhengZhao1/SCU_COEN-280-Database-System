@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+<!--Building Code-->
+    <xsd:element name="BuildingCode">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:pattern value="\s*[A-Z|a-z]{3}\s*"/>
+                <xsd:length value="3"/>
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+<!--Position-->
+    <xsd:element name="Position">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Latitude" type="xsd:string"/>
+                <xsd:element name="Longitude" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+<!--Address-->
+    <xsd:element name="Address">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="StreetNo" type="xsd:integer"/>
+                <xsd:element name="StrName" type="xsd:string"/>
+                <xsd:element name="City" type="xsd:string"/>
+                <xsd:element name="State" type="xsd:string"/>
+                <xsd:element name="Zip" type="xsd:integer"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+<!--Building-->
+    <xsd:element name="Building">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="BuildingCode"/>
+                <xsd:element name="BuildingName" type="xsd:string"/>
+                <xsd:element ref="Position"/>
+                <xsd:element ref="Address" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+        <xsd:key name="Key_BuildingCode">
+            <xsd:selector xpath=".//Building"></xsd:selector>
+            <xsd:field xpath="BuildingCode"></xsd:field>
+        </xsd:key>
+    </xsd:element>
+<!--Buildings-->
+    <xsd:element name="Buildings">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="Building" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
+
+

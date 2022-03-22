@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+<!--    <xs:include schemaLocation="buildings.xsd"/>-->
+
+<!--SSN-->
+    <xsd:element name="SSN">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:pattern value="\s*[0-9]{3}-[0-9]{2}-[0-9]{4}\s*"/>
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+<!--Date Of Birth-->
+    <xsd:element name="DOB">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:date"/>
+        </xsd:simpleType>
+    </xsd:element>
+<!--Gender-->
+    <xsd:element name="Gender">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="M"/>
+                <xsd:enumeration value="F"/>
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+<!--Type-->
+    <xsd:element name="Type">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="Both"/>
+                <xsd:enumeration value="Master"/>
+                <xsd:enumeration value="Phd"/>
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+<!--Phone Number-->
+    <xsd:element name="PhoneNumber">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:pattern value="\s*\d{3}\-[0-9|\-]{7,11}\s*"/>
+                <xsd:minLength value="10"/>
+                <xsd:maxLength value="14"/>
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+<!--BuildingCode-->
+    <xsd:element name="BuildingCode">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:pattern value="\s*[A-Z|a-z]{3}\s*"/>
+                <xsd:length value="3"/>
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+<!--Student-->
+    <xsd:element name="Student">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="SSN"/>
+                <xsd:element name="Name" type="xsd:string"/>
+                <xsd:element ref="DOB"/>
+                <xsd:element ref="Gender"/>
+                <xsd:element ref="Type"/>
+                <xsd:element ref="BuildingCode" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element ref="PhoneNumber" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+        <xsd:key name="Key_SSN">
+            <xsd:selector xpath=".//Student"></xsd:selector>
+            <xsd:field xpath="SSN"></xsd:field>
+        </xsd:key>
+    </xsd:element>
+<!--Students-->
+    <xsd:element name="Students">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="Student" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
